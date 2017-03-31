@@ -1,0 +1,40 @@
+<main>
+
+  <div id="added">
+    {{#each burgers}}
+      {{#unless this.devoured}}
+          <div class="burger">
+            <img src="http://www.pngmart.com/files/1/Healthy-Burger-PNG.png">
+            <h2>{{this.burger_name}}</h2>
+            <form action='/updateBurger/{{@key}}?_method=PUT' method='POST'>
+                <input type='hidden' name='devoured' value='true'>
+                <button type='submit' class="devour"> Eat me! </button>
+            </form>
+          </div>
+      {{/unless}}
+    {{/each}}
+  </div>
+
+  <div>
+    <ul id="eaten">
+      <li>
+        <h1> Eaten </h1>
+      </li>
+      {{#each burgers}}
+          {{#if this.devoured}}
+              <li>
+                {{this.burger_name}}
+              </li>
+          {{/if}}
+      {{/each}}
+    </ul>
+  </div>
+
+  <form method="POST" action='/addBurger'>
+      <input type="text" name="name" placeholder="Enter your burger" />
+      <input type="radio" name="devoured" value="1"> True
+      <input type="radio" name="devoured" value="0"> False
+      <input type="submit" />
+  </form>
+
+</main>
